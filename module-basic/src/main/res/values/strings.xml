@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="basic_no_more_data">The End</string>
+    <string name="basic_loading">Loading...</string>
+    <string name="basic_retry_button">Reload</string>
+</resources>

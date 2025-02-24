@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="basic_no_more_data">もうデータはない</string>
+    <string name="basic_loading">ローディング...</string>
+    <string name="basic_retry_button">リロード</string>
+</resources>

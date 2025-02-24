@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="basic_no_more_data">Niet meer gegevens</string>
+    <string name="basic_loading">Laden...</string>
+    <string name="basic_retry_button">Reload</string>
+</resources>

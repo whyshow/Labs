@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+   <string name="basic_no_more_data">Não há mais dados</string>
+   <string name="basic_loading">Carregando…</string>
+   <string name="basic_retry_button">Recarregar</string>
+</resources>

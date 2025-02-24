@@ -1,0 +1,51 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'club.ccit.labs'
+    compileSdk rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId "club.ccit.labs"
+        minSdk rootProject.ext.android.minSdkVersion
+        targetSdk rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    // 打包配置
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08"))
+            if (variant.buildType.name.equals('debug')) {
+                outputFileName = "Labs_debug_${versionName}_${date}.apk"
+            }
+            if (variant.buildType.name.equals('release')) {
+                outputFileName = "Labs_release_${versionName}_${date}.apk"
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation project(path: ':module-basic')
+}
+apply from: "../aspectj.gradle"

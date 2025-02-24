@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="basic_no_more_data">没有更多了</string>
+    <string name="basic_loading">加载中...</string>
+    <string name="basic_retry_button">重新加载</string>
+</resources>

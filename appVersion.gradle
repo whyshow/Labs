@@ -1,0 +1,18 @@
+// 依赖姓名统一配置管理
+ext {
+    // Android 扩展配置
+    android = [
+            compileSdkVersion: 35, // Android 14
+            targetSdkVersion : 34, // Android 14
+            minSdkVersion    : 24, // Android 7.0
+            buildToolsVersion: '35.0.0',
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+    // ndk 配置
+    abiFilters = [
+            v8: 'arm64-v8a', // 'x86_64' 'arm64-v8a'
+            x86: 'x86_64', // 'x86_64' 'arm64-v8a'
+            v7 : 'armeabi-v7a' // armeabi-v7a
+    ]
+}

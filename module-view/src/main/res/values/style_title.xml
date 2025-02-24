@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    通用标题栏-->
+    <style name="titleBarStyle">
+        <item name="titleStyle">normal</item>
+        <item name="leftIcon">@drawable/ic_view_left_back</item>
+        <item name="leftIconHeight">18dp</item>
+        <item name="leftIconWidth">18dp</item>
+        <item name="lineVisible">false</item>
+        <item name="titleSize">18dp</item>
+        <item name="titleColor">#000000</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+</resources>

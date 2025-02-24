@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="basic_no_more_data">Plus de données</string>
+    <string name="basic_loading">Chargement...</string>
+    <string name="basic_retry_button">Recharge</string>
+</resources>
