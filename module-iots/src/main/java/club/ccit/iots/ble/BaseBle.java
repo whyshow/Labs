@@ -42,7 +42,7 @@ import club.ccit.iots.common.LogUtils;
 /**
  * File: BaseBle
  * Author: swzhang3
- * Date: 2023/3/14 16:38
+ * Date: 2025/2/14 16:38
  * Description: 蓝牙基类：搜索、连接、断开、发送数据、接收数据
  */
 public abstract class BaseBle extends ViewModel {

@@ -47,5 +47,6 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation project(path: ':module-basic')
+    implementation project(path: ':module-view')
 }
 apply from: "../aspectj.gradle"

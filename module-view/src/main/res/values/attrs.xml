@@ -128,4 +128,9 @@
         <attr name="customParentCurrentBackground" format="reference|color" />
 
     </declare-styleable>
+
+    <declare-styleable name="RoundedImageView">
+        <!--        圆角-->
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
 </resources>
