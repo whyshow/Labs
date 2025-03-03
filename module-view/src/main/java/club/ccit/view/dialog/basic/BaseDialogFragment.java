@@ -1,6 +1,5 @@
 package club.ccit.view.dialog.basic;
 
-
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +27,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
+
+import club.ccit.view.R;
 
 public abstract class BaseDialogFragment<T extends ViewDataBinding> extends DialogFragment implements ClickAction {
     protected T binding;
@@ -267,4 +269,30 @@ public abstract class BaseDialogFragment<T extends ViewDataBinding> extends Dial
         binding = null;
     }
 
+    public interface AnimAction {
+        /**
+         * 默认动画效果
+         */
+        int ANIM_DEFAULT = -1;
+
+        /**
+         * 没有动画效果
+         */
+        int ANIM_EMPTY = 0;
+
+        /**
+         * 缩放动画
+         */
+        int ANIM_SCALE = R.style.ScaleAnimStyle;
+
+        /**
+         * 吐司动画
+         */
+        int ANIM_TOAST = android.R.style.Animation_Toast;
+
+        /**
+         * 底部弹出动画
+         */
+        int ANIM_BOTTOM = R.style.BottomAnimStyle;
+    }
 }
