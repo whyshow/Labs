@@ -27,4 +27,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             showToast("num:" + num);
         }
     }
+
+    @Override
+    protected ScreenDirection setScreenOrientation() {
+        return ScreenDirection.LANDSCAPE;
+    }
 }
