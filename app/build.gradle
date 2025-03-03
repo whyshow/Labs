@@ -17,11 +17,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    MODEL: "RELEASE"
+            ]
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    MODEL: "DEBUG"
+            ]
         }
     }
     // 打包配置
-    android.applicationVariants.all { variant ->
-        variant.outputs.all {
+    android.applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
             def date = new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08"))
             if (variant.buildType.name.equals('debug')) {
                 outputFileName = "Labs_debug_${versionName}_${date}.apk"
@@ -48,5 +59,6 @@ dependencies {
     implementation libs.material
     implementation project(path: ':module-basic')
     implementation project(path: ':module-view')
+    implementation project(path: ':module-aop')
 }
 apply from: "../aspectj.gradle"

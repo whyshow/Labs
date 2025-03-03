@@ -131,6 +131,6 @@
 
     <declare-styleable name="RoundedImageView">
         <!--        圆角-->
-        <attr name="radius" format="dimension" />
+        <attr name="imageView_radius" format="dimension" />
     </declare-styleable>
 </resources>

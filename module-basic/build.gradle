@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdk rootProject.ext.android.compileSdkVersion
-    namespace 'com.nepviewer.basic'
+    namespace 'club.ccit.basic'
 
     defaultConfig {
         minSdk rootProject.ext.android.minSdkVersion

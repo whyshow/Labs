@@ -5,52 +5,65 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import club.ccit.view.R;
 
 public class RoundedImageView extends AppCompatImageView {
-    private float cornerRadius = 0f;
+    // 增加默认圆角值
+    private final float DEFAULT_RADIUS = 0f;
+    private float cornerRadius = DEFAULT_RADIUS;
     private final Path path = new Path();
     private final RectF rect = new RectF();
 
-    public RoundedImageView(Context context) {
+    public RoundedImageView(@NonNull Context context) {
         super(context);
-        init(context, null);
     }
 
-    public RoundedImageView(Context context, AttributeSet attrs) {
+    public RoundedImageView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
+    public RoundedImageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
+    }
+
+    // 修改初始化逻辑
     private void init(Context context, AttributeSet attrs) {
-        try (TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RoundedImageView)) {
-            cornerRadius = ta.getDimension(R.styleable.RoundedImageView_radius, 0);
-            ta.recycle();
+        TypedArray ta = null;
+        try {
+            ta = context.obtainStyledAttributes(attrs, R.styleable.RoundedImageView);
+            cornerRadius = ta.getDimension(R.styleable.RoundedImageView_imageView_radius, DEFAULT_RADIUS);
+        } finally {
+            if (ta != null) {
+                ta.recycle();
+            }
         }
 
-        // 解决部分设备硬件加速不兼容问题
-        setLayerType(LAYER_TYPE_SOFTWARE, null);
+        // 仅在API 17以下禁用硬件加速（更精确的条件判断）
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            setLayerType(LAYER_TYPE_SOFTWARE, null);
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // 创建裁剪区域
+        // 重置路径避免重复叠加
+        path.reset();
         rect.set(0, 0, getWidth(), getHeight());
         path.addRoundRect(rect, cornerRadius, cornerRadius, Path.Direction.CW);
 
-        // 先绘制背景（如果有）
-        if (getBackground() != null) {
-            canvas.clipPath(path);
-            super.onDraw(canvas);
-        }
-        // 再绘制前景图片
-        else if (getDrawable() != null) {
-            canvas.clipPath(path);
-            super.onDraw(canvas);
-        }
+        // 合并绘制逻辑
+        canvas.save();
+        canvas.clipPath(path);
+        super.onDraw(canvas);
+        canvas.restore();
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorPageBackground">#F5F6FA</color>
+    <color name="colorButtonBackground">#0D99FF</color>
+    <color name="colorTextLink">#0D99FF</color>
+    <color name="colorSplitLines">#EBEDF0</color>
+    <color name="colorTextTitle">#212121</color>
+    <color name="colorTextJunior">#6E7580</color>
+    <color name="colorTextColorHint">#C9CED6</color>
+    <color name="colorTextCaution">#FF6600</color>
+    <color name="colorTextRed">#FFD8000B</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#BC050E</color>
+</resources>

@@ -2,8 +2,8 @@
 ext {
     // Android 扩展配置
     android = [
-            compileSdkVersion: 35, // Android 14
-            targetSdkVersion : 34, // Android 14
+            compileSdkVersion: 35, // Android 15
+            targetSdkVersion : 35, // Android 15
             minSdkVersion    : 24, // Android 7.0
             buildToolsVersion: '35.0.0',
             versionCode      : 1,

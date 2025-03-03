@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="club.ccit.basic.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_app_ico"
         android:label="@string/app_name"
@@ -10,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Labs"
         tools:targetApi="31">
-
+        <!--        设置运行是DEBUG或者RELEASE-->
+        <meta-data
+            android:name="MODEL"
+            android:value="${MODEL}" />
         <activity
             android:name="club.ccit.labs.MainActivity"
             android:exported="true">

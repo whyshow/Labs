@@ -1,14 +1,15 @@
 [versions]
 # agp版本
-agp = "8.5.0"
+agp = "8.5.2"
 # 新增依赖版本
 appcompat = "1.7.0"
+aspectjtools = "1.9.8"
 material = "1.12.0"
-constraintlayout = "2.2.0"
-navigation = "2.8.7"
+constraintlayout = "2.2.1"
+navigation = "2.8.8"
 fragment = "1.8.6"
 recyclerview = "1.4.0"
-viewbinding = "8.8.1"
+viewbinding = "8.8.2"
 gson = "2.10.1"
 arouter = "1.5.2"
 glide = "4.13.2"
@@ -24,6 +25,8 @@ eventbus = "3.3.1"
 
 [libraries]
 # 新增 AndroidX 库
+aspectjtools = { module = "org.aspectj:aspectjtools", version.ref = "aspectjtools" }
+aspectjweaver = { module = "org.aspectj:aspectjweaver", version.ref = "aspectjtools" }
 constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigationFragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
 fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
