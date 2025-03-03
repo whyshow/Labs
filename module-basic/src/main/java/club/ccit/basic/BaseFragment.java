@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import androidx.viewbinding.ViewBinding;
 
 import club.ccit.basic.action.ClickAction;
 import club.ccit.basic.action.ToastWidget;
@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
  * Description: Fragment 基类
  * Version:
  */
-public abstract class BaseFragment<T extends ViewBinding> extends Fragment implements ClickAction, ToastWidget {
+public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment implements ClickAction, ToastWidget {
     protected T binding;
 
     @Nullable
@@ -85,30 +85,8 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
      */
     public int px2dip(float pxValue) {
         final float scale = getResources().getDisplayMetrics().density;
-        int dipValue = (int) (pxValue / scale + 0.5f);
-        return dipValue;
+        return (int) (pxValue / scale + 0.5f);
     }
-
-    /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
-     *
-     * @param dp
-     * @return
-     */
-    public int dpToPx(int dp) {
-        float density = getResources().getDisplayMetrics().density;
-        return Math.round(dp * density);
-    }
-
-    /**
-     * 获取屏幕密度
-     *
-     * @return
-     */
-    public float getDensity() {
-        return getResources().getDisplayMetrics().density;
-    }
-
 
     /**
      * 结束回调

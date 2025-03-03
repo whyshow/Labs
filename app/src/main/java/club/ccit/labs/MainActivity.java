@@ -1,11 +1,13 @@
 package club.ccit.labs;
 
+
 import android.view.View;
 
-import club.ccit.aop.click.SingleClick;
+
 import club.ccit.basic.BaseActivity;
 
 import club.ccit.labs.databinding.ActivityMainBinding;
+import club.ccit.view.dialog.LoadDialog;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
@@ -15,16 +17,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void onCreate() {
         super.onCreate();
 
-        setOnClickListener(binding.roundedImageView);
+        setOnClickListener(binding.roundedImageView, binding.button);
     }
 
-    @SingleClick(2000)
     @Override
     public void onClick(View view) {
         super.onClick(view);
         if (view == binding.roundedImageView) {
             num++;
             showToast("num:" + num);
+        }
+        if (view == binding.button) {
+            LoadDialog.getInstance(this).showDialog();
+            LoadDialog.getInstance(MainActivity.this).showDialog();
         }
     }
 

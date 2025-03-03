@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
-import club.ccit.basic.R;
-
 import club.ccit.basic.action.AdapterAction;
 import club.ccit.basic.action.ToastWidget;
 
@@ -93,13 +91,13 @@ public abstract class BaseAdapter<T extends ViewBinding> extends RecyclerView.Ad
      * @param page
      */
     public void putData(List list, int page) {
-        if (list != null && !list.isEmpty()) {
+        if (list != null && list.size() > 0) {
             if (page >= 0) {
                 if (this.list == null) {
                     this.list = new ArrayList();
                 }
                 for (int i = 0; i < list.size(); i++) {
-                    this.list.add(this.list.isEmpty() ? 0 : this.list.size() - 1, list.get(i));
+                    this.list.add(this.list.size() == 0 ? 0 : this.list.size() - 1, list.get(i));
                 }
                 notifyItemRangeInserted(this.list.size() - list.size(), list.size());
                 FOOTER_TYPE = FOOTER_LOADING;
