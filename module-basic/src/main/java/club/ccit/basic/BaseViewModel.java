@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
  * FileName: BaseViewModel
  *
  * @author: 张帅威
- * Date: 2022/1/12 3:49 下午
+ * Date: 2025/1/12 3:49 下午
  * Description: ViewModel 基类
  * Version:
  */

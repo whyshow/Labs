@@ -60,5 +60,6 @@ dependencies {
     implementation project(path: ':module-basic')
     implementation project(path: ':module-view')
     implementation project(path: ':module-aop')
+    debugImplementation libs.leakcanaryAndroid
 }
 apply from: "../aspectj.gradle"

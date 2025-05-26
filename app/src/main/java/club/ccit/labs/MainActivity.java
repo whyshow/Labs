@@ -1,6 +1,5 @@
 package club.ccit.labs;
 
-
 import android.view.View;
 
 
@@ -18,6 +17,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         super.onCreate();
 
         setOnClickListener(binding.roundedImageView, binding.button);
+
     }
 
     @Override
@@ -28,13 +28,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             showToast("num:" + num);
         }
         if (view == binding.button) {
-            LoadDialog.getInstance(this).showDialog();
+            LoadDialog.getInstance(this).showDialog("加载中");
             LoadDialog.getInstance(MainActivity.this).showDialog();
         }
     }
 
     @Override
     protected ScreenDirection setScreenOrientation() {
-        return ScreenDirection.LANDSCAPE;
+        return ScreenDirection.UNSPECIFIED;
     }
 }

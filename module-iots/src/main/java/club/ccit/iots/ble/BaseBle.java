@@ -26,8 +26,6 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-
-
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;

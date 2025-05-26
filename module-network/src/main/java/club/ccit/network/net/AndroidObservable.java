@@ -16,7 +16,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * Description: Android 生命周期进行关联
  * Version:
  */
-public class AndroidObservable<T> extends Observable<T> implements HasUpstreamObservableSource<T> {
+public class
+AndroidObservable<T> extends Observable<T> implements HasUpstreamObservableSource<T> {
 
     private final Observable<T> source;
     private LifecycleProvider mLifecycleProvider;

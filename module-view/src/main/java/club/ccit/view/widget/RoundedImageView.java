@@ -46,11 +46,6 @@ public class RoundedImageView extends AppCompatImageView {
                 ta.recycle();
             }
         }
-
-        // 仅在API 17以下禁用硬件加速（更精确的条件判断）
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            setLayerType(LAYER_TYPE_SOFTWARE, null);
-        }
     }
 
     @Override

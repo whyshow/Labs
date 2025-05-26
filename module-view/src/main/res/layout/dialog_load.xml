@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#00000000">
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/style_common_white_radius_8dp">
+            android:background="@drawable/style_common_f8f8f8_radius_8dp">
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="15dp">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp" />
 
                 <TextView
                     android:id="@+id/massage"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginTop="15dp"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:maxLines="2"
+                    android:maxLines="3"
                     android:text=""
                     android:textColor="#212121"
-                    android:visibility="gone" />
+                    android:textSize="14sp"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/closeImageButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="right"
+                android:padding="8dp"
+                android:src="@drawable/ic_dialog_close" />
         </FrameLayout>
 
     </FrameLayout>
+
 </layout>

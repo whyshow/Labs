@@ -10,36 +10,66 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 /**
- * 确保在 UI 线程上执行带有“@UiThread”注释的方法的一个方面。
- * <p>
- * 此方面拦截用“@UiThread”注释的方法调用并切换执行
- * 使用绑定到主 Looper 的“Handler”到 UI 线程。这确保了
- * 带注释的方法始终在 UI 线程上执行，即使它们是从
- * 后台线程。
+ * UI线程切面处理类
+ * 确保被@UiThread注解的方法在UI线程执行
  */
 @Aspect
 public class UIThreadAspect {
+    private static final String TAG = "UIThreadAspect";
+    private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
 
-    private static final String TAG = "UiThreadAspect";
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
-
-    // 定义切点，拦截所有需要在 UI 线程执行的方法
-    @Pointcut("execution(@com.nepviewer.aop.thread.UiThread * *(..))")
-    public void methodAnnotatedWithUiThread() {
+    /**
+     * 定义切点：拦截所有被@UiThread注解的方法
+     */
+    @Pointcut("execution(@club.ccit.aop.thread.UiThread * *(..))")
+    public void uiThreadAnnotatedMethod() {
+        // 切点方法体为空，仅用于定义切点
     }
 
-    // 定义通知方法，在目标方法执行后执行
-    @Around("methodAnnotatedWithUiThread()")
-    public void runOnUiThread(ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.d(TAG, "Switching to UI thread...");
-        mainHandler.post(() -> {
-            // 在 UI 线程执行的代码
-            Log.d(TAG, "Running on UI thread.");
+    /**
+     * 处理UI线程切换逻辑
+     *
+     * @param joinPoint 连接点
+     * @return 方法执行结果
+     * @throws Throwable 可能抛出的异常
+     */
+    @Around("uiThreadAnnotatedMethod()")
+    public Object executeOnUiThread(ProceedingJoinPoint joinPoint) throws Throwable {
+        if (isOnMainThread()) {
+            Log.d(TAG, "Already on UI thread, proceed directly");
+            return joinPoint.proceed();
+        }
+
+        Log.d(TAG, "Switching to UI thread for method execution");
+        MAIN_HANDLER.post(() -> {
             try {
                 joinPoint.proceed();
             } catch (Throwable e) {
-                throw new RuntimeException(e);
+                handleExecutionException(e);
             }
         });
+        return null;
+    }
+
+    /**
+     * 检查当前是否在主线程
+     *
+     * @return true-在主线程 false-不在主线程
+     */
+    private boolean isOnMainThread() {
+        return Looper.myLooper() == Looper.getMainLooper();
+    }
+
+    /**
+     * 处理方法执行异常
+     *
+     * @param e 异常对象
+     */
+    private void handleExecutionException(Throwable e) {
+        Log.e(TAG, "Error executing method on UI thread", e);
+        if (e instanceof RuntimeException) {
+            throw (RuntimeException) e;
+        }
+        throw new RuntimeException("Execution failed on UI thread", e);
     }
 }

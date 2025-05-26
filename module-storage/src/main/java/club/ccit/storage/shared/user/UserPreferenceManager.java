@@ -7,8 +7,8 @@ import club.ccit.storage.shared.user.model.UserPreferencesModel;
 
 /**
  * FileName: UserPreferenceManager
- *
- * @author: mosaic
+
+ * author:  mosaic
  * Date: 2023/4/6 08:23
  * Description:
  * Version:
@@ -19,7 +19,7 @@ public class UserPreferenceManager implements ApplicationContext {
     /**
      * SharedPreferences 存储的名称
      */
-    private static final String SHARED_PREFERENCES_NAME = "nepViewer_user";
+    private static final String SHARED_PREFERENCES_NAME = "user";
 
     /**
      * 单例获取 UserPreferenceManager
