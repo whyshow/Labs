@@ -1,11 +1,6 @@
 package club.ccit.network.net;
 
 import static club.ccit.network.net.InternetStateCode.CODE401;
-import static club.ccit.network.net.InternetStateCode.CODE404;
-
-import android.util.Log;
-
-import java.io.IOException;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.observers.DisposableObserver;
@@ -28,15 +23,9 @@ public abstract class AbstractApiObserver<T> extends DisposableObserver<T> {
     public void onError(@NonNull Throwable e) {
         if (e instanceof HttpException) {
             HttpException ex = (HttpException) e;
-            if (ex.code() == CODE401){
+            if (ex.code() == CODE401) {
                 // 业务逻辑
-                try {
-                    Log.i("LOG111",((HttpException) e).response().errorBody().string());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }else if (ex.code() == CODE404){
-                error(((HttpException) e).response().code(),((HttpException) e).response().message());
+
             }
         }
     }
@@ -51,14 +40,17 @@ public abstract class AbstractApiObserver<T> extends DisposableObserver<T> {
 
     /**
      * 请求数据成功
-     * @param t
+     *
+     * @param t 返回的数据
      */
     protected abstract void succeed(T t);
- /**
+
+    /**
      * 请求数据错误
-  * @param code
-  * @param message
-  */
+     *
+     * @param code     错误码
+     * @param message  错误信息
+     */
     protected abstract void error(int code, String message);
 
 }

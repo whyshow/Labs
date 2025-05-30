@@ -23,6 +23,10 @@ rxlifecycle = "4.0.2"
 okhttp3 = "3.14.9"
 okio = "3.0.0"
 eventbus = "3.3.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+navigationFragment = "2.9.0"
 
 [libraries]
 # 新增 AndroidX 库
@@ -62,8 +66,12 @@ annotationArouter = { group = "com.alibaba", name = "arouter-compiler", version.
 
 # 事件总线
 eventbus = { group = "org.greenrobot", name = "eventbus", version.ref = "eventbus" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+extJunit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
 [plugins]
 # 保留已有插件
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 

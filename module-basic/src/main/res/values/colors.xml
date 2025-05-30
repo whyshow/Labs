@@ -2,8 +2,6 @@
 <resources>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorPageBackground">#F5F6FA</color>
-    <color name="colorButtonBackground">#0D99FF</color>
     <color name="colorTextLink">#0D99FF</color>
     <color name="colorSplitLines">#EBEDF0</color>
     <color name="colorTextTitle">#212121</color>
@@ -13,4 +11,9 @@
     <color name="colorTextRed">#FFD8000B</color>
     <color name="transparent">#00000000</color>
     <color name="colorPrimary">#BC050E</color>
+    <color name="colorIconT">#0D99FF</color>
+    <color name="colorIconF">#D8D8D8</color>
+
+    <color name="colorPageBackground">#F5F6FA</color>
+    <color name="colorButtonBackground">#0D99FF</color>
 </resources>

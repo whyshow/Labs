@@ -1,7 +1,5 @@
 package club.ccit.network.net;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -25,8 +23,7 @@ public class NullOnEmptyConverterFactory extends Converter.Factory {
         return new Converter<ResponseBody, Object>() {
             @Override
             public Object convert(ResponseBody body) throws IOException {
-                Log.d("log111","NullOnEmptyConverterFactory");
-                if (body.contentLength() == 0){
+                if (body.contentLength() == 0) {
                     return null;
                 }
                 return delegate.convert(body);

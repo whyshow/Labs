@@ -4,19 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-import club.ccit.basic.action.ClickAction;
-import club.ccit.basic.action.ToastWidget;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import club.ccit.basic.action.ClickAction;
+import club.ccit.basic.action.ToastWidget;
 
 /**
  * @author: 张帅威
@@ -24,13 +25,17 @@ import java.lang.reflect.Type;
  * Description: Fragment 基类
  * Version:
  */
-public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment implements ClickAction, ToastWidget {
+public abstract class BaseViewDataFragment<T extends ViewDataBinding> extends Fragment implements ClickAction, ToastWidget {
     protected T binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = onSetViewBinding();
+        if (setStatusBackgroundColor() != -1) {
+            Window window = requireActivity().getWindow();
+            window.setStatusBarColor(setStatusBackgroundColor());
+        }
         return binding.getRoot();
     }
 
@@ -38,7 +43,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         onCreate();
-
     }
 
     protected void onCreate() {
@@ -95,6 +99,10 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    protected int setStatusBackgroundColor() {
+        return -1;
     }
 
 }

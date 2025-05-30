@@ -1,4 +1,4 @@
-package club.ccit.network.demo;
+package club.ccit.network.news;
 
 import club.ccit.network.net.BaseApiProvider;
 import okhttp3.Interceptor;
@@ -15,6 +15,7 @@ import okhttp3.Request;
 public class NewsApiProvider extends BaseApiProvider {
 
     NewsApi newsApi;
+
     /**
      * 实例化一些连接网络配置
      */
@@ -26,11 +27,12 @@ public class NewsApiProvider extends BaseApiProvider {
 
     @Override
     protected String baseUrl() {
-        return "http://api.ccit.club/";
+        return "http://v.juhe.cn";
     }
 
     /**
      * 获取新闻列表
+     *
      * @return
      */
     public NewsApi getNewsList() {
@@ -41,8 +43,7 @@ public class NewsApiProvider extends BaseApiProvider {
     protected Request setHeader(Interceptor.Chain chain) {
         return chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "1986f37e-083d-4d79-8f03-a66995168ec5")
-                .addHeader("client-id", "android_app_myb")
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
     }
 }

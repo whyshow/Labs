@@ -10,15 +10,16 @@
         android:roundIcon="@mipmap/ic_app_ico"
         android:supportsRtl="true"
         android:theme="@style/Theme.Labs"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <!--        设置运行是DEBUG或者RELEASE-->
         <meta-data
             android:name="MODEL"
             android:value="${MODEL}" />
-        <activity
-            android:name="club.ccit.labs.MainActivity"
-            android:exported="true">
 
+        <activity
+            android:name="club.ccit.labs.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
