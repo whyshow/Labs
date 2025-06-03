@@ -140,7 +140,6 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
                 notifyItemChanged(getItemCount() - 1);
             }
         }
-        notifyDataSetChanged();
     }
 
     /**
