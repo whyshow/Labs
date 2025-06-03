@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 通用RecyclerView适配器基类，支持自动分页加载和多种底部状态显示
@@ -113,11 +115,30 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
             currentState = STATE_NO_MORE;
             notifyItemChanged(getItemCount() - 1);
         } else {
+            // 创建现有数据唯一标识集合
+            Set<String> existingKeys = new HashSet<>();
+            for (D item : dataList) {
+                existingKeys.add(getUniqueId(item));
+            }
+
+            // 过滤重复数据
+            List<D> filteredData = new ArrayList<>();
+            for (D item : newData) {
+                if (!existingKeys.contains(getUniqueId(item))) {
+                    filteredData.add(item);
+                }
+            }
+
             int oldSize = dataList.size();
-            dataList.addAll(newData);
-            // 局部刷新优化：只通知新增范围
-            notifyItemRangeInserted(oldSize, newData.size());
-            isLoading = false; // 重置加载锁
+            dataList.addAll(filteredData);
+            notifyItemRangeInserted(oldSize, filteredData.size());
+            isLoading = false;
+
+            // 如果过滤后数据为空，显示无更多数据
+            if (filteredData.isEmpty()) {
+                currentState = STATE_NO_MORE;
+                notifyItemChanged(getItemCount() - 1);
+            }
         }
         notifyDataSetChanged();
     }
@@ -130,6 +151,8 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
     public void setLoadMoreListener(LoadMoreListener listener) {
         this.loadMoreListener = listener;
     }
+
+    protected abstract String getUniqueId(D item);
 
     /**
      * 抽象方法：实现数据绑定逻辑

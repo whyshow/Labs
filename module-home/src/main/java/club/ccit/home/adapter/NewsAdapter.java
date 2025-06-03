@@ -22,6 +22,11 @@ public class NewsAdapter extends BasicAdapter<ItemNewsBinding, NewsListResultDat
     }
 
     @Override
+    protected String getUniqueId(NewsListResultData item) {
+        return item.getUniquekey();
+    }
+
+    @Override
     protected void onBindData(DataViewHolder holder, NewsListResultData item) {
         // 绑定数据到视图
         holder.binding.textNewsTitle.setText(item.getTitle());
