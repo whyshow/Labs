@@ -1,53 +1,26 @@
 package club.ccit.network.news.model;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 // 新闻列表请求返回数据
 public class NewsListResultModel {
     private String reason;
-    private Result result;
+    private List<NewsListResultData> result;
 
     public String getReason() {
-        return reason == null ? "" : reason.trim();
-
+        return reason;
     }
 
     public void setReason(String reason) {
-        this.reason = reason == null ? "" : reason;
+        this.reason = reason;
     }
 
-    public Result getResult() {
-        return result == null ? new Result() : result;
-
+    public List<NewsListResultData> getResult() {
+        return result;
     }
 
-    public void setResult(Result result) {
+    public void setResult(List<NewsListResultData> result) {
         this.result = result;
     }
-
-    // 请求结果
-    public class Result {
-        private String stat;
-        private List<NewsListResultData> data;
-
-        public String getStat() {
-            return stat == null ? "" : stat.trim();
-
-        }
-
-        public void setStat(String stat) {
-            this.stat = stat == null ? "" : stat;
-        }
-
-        public List<NewsListResultData> getData() {
-            return data == null ? new ArrayList<>() : data;
-
-        }
-
-        public void setData(List<NewsListResultData> data) {
-            this.data = data;
-        }
-    }
-
 }

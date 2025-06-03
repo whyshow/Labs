@@ -16,8 +16,6 @@ import club.ccit.home.databinding.FragmentNewsBinding;
 import club.ccit.network.news.model.NewsType;
 
 public class NewsFragment extends BaseViewDataFragment<FragmentNewsBinding> {
-    private NewsFragmentCollectionAdapter fragmentCollectionAdapter;
-    private TabLayoutMediator tabLayoutMediator;
 
     @Override
     protected void onCreate() {
@@ -26,14 +24,12 @@ public class NewsFragment extends BaseViewDataFragment<FragmentNewsBinding> {
     }
 
     private void initViewPager() {
-//        String[] title = new String[]{NewsType.TOP.getDesc(), NewsType.DOMESTIC.getDesc(), NewsType.INTERNATIONAL.getDesc(), NewsType.ENTERTAINMENT.getDesc(),
-//                NewsType.SPORTS.getDesc(), NewsType.MILITARY.getDesc(), NewsType.TECHNOLOGY.getDesc(), NewsType.FINANCE.getDesc(),
-//                NewsType.GAMES.getDesc(), NewsType.AUTO.getDesc(), NewsType.HEALTH.getDesc()};
+      //  String[] title = new String[]{NewsType.TOP.getDesc(), NewsType.DOMESTIC.getDesc(), NewsType.SPORTS.getDesc(),NewsType.TECHNOLOGY.getDesc(), NewsType.GAMES.getDesc()};
         String[] title = new String[]{NewsType.TOP.getDesc()};
-        fragmentCollectionAdapter = new NewsFragmentCollectionAdapter(requireActivity(), title);
+        NewsFragmentCollectionAdapter fragmentCollectionAdapter = new NewsFragmentCollectionAdapter(requireActivity(), title);
         binding.viewPager2.setAdapter(fragmentCollectionAdapter);
         binding.viewPager2.setOffscreenPageLimit(title.length);
-        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, (tab, position) -> tab.setText(title[position]));
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, (tab, position) -> tab.setText(title[position]));
         tabLayoutMediator.attach();
 
         // 去除长按toast

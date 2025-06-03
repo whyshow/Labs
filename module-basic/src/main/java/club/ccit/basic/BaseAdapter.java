@@ -46,10 +46,9 @@ public abstract class BaseAdapter<T extends ViewBinding> extends RecyclerView.Ad
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (list.get(list.size() - 1) instanceof Integer) {
-
-        }else {
+        if (position == getItemCount() - 1 && !(list.get(position) instanceof Integer)) {
             list.add(FOOTER_TYPE);
+            notifyItemInserted(getItemCount() - 1);
         }
         if (getItemViewType(position) == TYPE_DATA) {
             onBindingViewData((ViewHolder) holder, position);

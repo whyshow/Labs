@@ -42,4 +42,5 @@ dependencies {
     implementation project(path: ':module-basic')
     implementation project(path: ':module-network')
     implementation project(path: ':module-view')
+    implementation libs.swiperefreshlayout
 }

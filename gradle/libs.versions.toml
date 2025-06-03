@@ -27,6 +27,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 navigationFragment = "2.9.0"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 # 新增 AndroidX 库
@@ -69,6 +70,7 @@ eventbus = { group = "org.greenrobot", name = "eventbus", version.ref = "eventbu
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 extJunit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 # 保留已有插件

@@ -37,6 +37,7 @@ include ':module-storage'
 include ':module-aop'
 include ':module-utils'
 include ':module-iots'
-include ':module-network'
 include ':module-view'
 include ':module-home'
+include ':module-network'
+

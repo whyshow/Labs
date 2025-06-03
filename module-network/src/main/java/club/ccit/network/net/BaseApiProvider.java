@@ -48,9 +48,7 @@ public abstract class BaseApiProvider {
             return chain.proceed(request);
         });
         // 如果是DEBUG模式设置打印日志
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(loggingInterceptor);
-        }
+        builder.addInterceptor(loggingInterceptor);
         OkHttpClient client = builder.build();
         mRetrofit = new Retrofit.Builder()
                 // 加入配置
@@ -85,8 +83,7 @@ public abstract class BaseApiProvider {
     protected Request setHeader(Interceptor.Chain chain){
         return chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "1986f37e-083d-4d79-8f03-a66995168ec5")
-                .addHeader("client-id", "app_myb_android")
+                .addHeader("content-type", "application/json")
                 .build();
     }
 }

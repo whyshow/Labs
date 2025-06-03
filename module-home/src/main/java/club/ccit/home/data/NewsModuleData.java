@@ -34,21 +34,14 @@ public class NewsModuleData extends BaseViewModel {
      * @param requestModel 新闻列表请求参数
      */
     public void getNewsList(NewsListRequestModel requestModel) {
-        AndroidObservable.create(newsApi.getNewsList(
-                requestModel.getKey(),
-                requestModel.getType(),
-                requestModel.getPage(),
-                requestModel.getPage_size(),
-                requestModel.getIs_filter()
-        )).subscribe(new AbstractApiObserver<NewsListResultModel>() {
+        AndroidObservable.create(newsApi.getNewsList(requestModel)).subscribe(new AbstractApiObserver<NewsListResultModel>() {
             @Override
             protected void succeed(NewsListResultModel newsListResultModel) {
-                if (newsListResultModel.getReason().equals("success!")){
+                if (newsListResultModel.getReason().equals("查询成功")){
                     // 请求成功
-                    newsListLiveData.setValue(newsListResultModel.getResult().getData());
+                    newsListLiveData.setValue(newsListResultModel.getResult());
                     ok.setValue(true);
                     // 保存到持久数据中
-
                 }else {
                     // 请求失败
                     messageText.setValue(newsListResultModel.getReason());

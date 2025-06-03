@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 import club.ccit.basic.BaseViewDataFragment;
+import club.ccit.basic.BasicAdapter;
+import club.ccit.home.adapter.NewsAdapter;
 import club.ccit.home.data.MainData;
 import club.ccit.home.data.NewsModuleData;
 import club.ccit.home.databinding.FragmentNewsModuleBinding;
@@ -25,8 +28,10 @@ import club.ccit.network.news.model.NewsType;
 public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleBinding> {
     private MainData mainData;// 持久新闻模块数据
     private NewsModuleData newsModuleData;// 新闻模块数据
-    private String key = "7292bbea82b0ad89f513adaa8d4a5d93"; // 新闻模块API密钥
     private String type = NewsType.TOP.getValue();// 新闻类型
+    private NewsAdapter newsAdapter;
+    private int pageSize = 10;
+
 
     public NewsModuleFragment(String type) {
         super();
@@ -43,14 +48,28 @@ public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleB
         // 设置观察者
         setObserver();
         newsModuleData.seSafetActivity((AppCompatActivity) requireActivity());
-        setRequestModel(1);
+        newsAdapter = new NewsAdapter(pageSize);
+        newsAdapter.setLoadMoreListener(new BasicAdapter.LoadMoreListener() {
+            @Override
+            public void onLoadMore(int nextPage) {
+                setRequestModel(nextPage);
+            }
+
+            @Override
+            public void onRetry() {
+                // 点击重试
+            }
+        });
+
+        binding.newsRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), GridLayoutManager.VERTICAL));
+        binding.newsRecyclerView.setAdapter(newsAdapter);
     }
 
     private void setRequestModel(int page) {
         // 设置新闻列表请求参数
         newsModuleData.newsListRequestModelMutableLiveData.getValue().setPage(page);
-        newsModuleData.newsListRequestModelMutableLiveData.getValue().setKey(key);
         newsModuleData.newsListRequestModelMutableLiveData.getValue().setType(type);
+        newsModuleData.newsListRequestModelMutableLiveData.getValue().setPage_size(pageSize);
         // 刷新请求参数
         newsModuleData.newsListRequestModelMutableLiveData.setValue(newsModuleData.newsListRequestModelMutableLiveData.getValue());
 
@@ -71,7 +90,10 @@ public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleB
             @Override
             public void onChanged(List<NewsListResultData> newsListResultData) {
                 // 更新新闻列表适配器
-
+                binding.newsRecyclerView.post(() -> {
+                    // 更新新闻列表适配器
+                    newsAdapter.appendData(newsListResultData);
+                });
                 // 将数据保存持久化中
                 String category = newsListResultData.get(0).getCategory();
                 Map<String, List<NewsListResultData>> currentData = mainData.saveNewsListResultData.getValue() == null ?

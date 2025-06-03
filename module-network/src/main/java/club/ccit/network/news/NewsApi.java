@@ -21,21 +21,18 @@ public interface NewsApi {
      *
      * @param requestModel 新闻列表请求参数
      * @return NewsListResultModel 新闻列表请求返回数据
-     * TODO 接口不支持这种请求
      */
-    @POST("/toutiao/index")
+    @POST("/news/index")
     Observable<NewsListResultModel> getNewsList(@Body NewsListRequestModel requestModel);
 
     /**
      * 新闻列表
      */
-    @GET("/toutiao/index")
+    @GET("/news/index")
     Observable<NewsListResultModel> getNewsList(
-            @Query("key") String key,
             @Query("type") String type,
             @Query("page") int page,
-            @Query("page_size") int pageSize,
-            @Query("is_filter") int isFilter
+            @Query("page_size") int pageSize
     );
 
 }
