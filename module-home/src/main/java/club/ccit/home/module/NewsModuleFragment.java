@@ -31,12 +31,13 @@ public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleB
     private String type = NewsType.TOP.getValue();// 新闻类型
     private NewsAdapter newsAdapter;
     private int pageSize = 10;
-
+    private NewsListRequestModel newsListRequestModel;
 
     public NewsModuleFragment(String type) {
         super();
         // 设置新闻类型
         this.type = NewsType.getValueByDesc(type);
+
     }
 
     @Override
@@ -45,6 +46,7 @@ public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleB
         // getActivity() 以父Activity绑定观察者，fragment关闭数据不消失，以this绑定观察者，fragment关闭数据消失
         mainData = new ViewModelProvider(requireActivity()).get(MainData.class);
         newsModuleData = new ViewModelProvider(this).get(NewsModuleData.class);
+        binding.swipeRefreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_blue_bright));
         // 设置观察者
         setObserver();
         newsModuleData.seSafetActivity((AppCompatActivity) requireActivity());
@@ -56,35 +58,37 @@ public class NewsModuleFragment extends BaseViewDataFragment<FragmentNewsModuleB
             }
 
             @Override
-            public void onRetry() {
+            public void onRetry(int page) {
                 // 点击重试
+                setRequestModel(page);
             }
         });
 
         binding.newsRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), GridLayoutManager.VERTICAL));
         binding.newsRecyclerView.setAdapter(newsAdapter);
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            // 刷新
+            setRequestModel(1);
+        });
     }
 
     private void setRequestModel(int page) {
+        newsListRequestModel = new NewsListRequestModel();
         // 设置新闻列表请求参数
-        newsModuleData.newsListRequestModelMutableLiveData.getValue().setPage(page);
-        newsModuleData.newsListRequestModelMutableLiveData.getValue().setType(type);
-        newsModuleData.newsListRequestModelMutableLiveData.getValue().setPage_size(pageSize);
-        // 刷新请求参数
-        newsModuleData.newsListRequestModelMutableLiveData.setValue(newsModuleData.newsListRequestModelMutableLiveData.getValue());
-
+        newsListRequestModel.setPage(page);
+        newsListRequestModel.setType(type);
+        newsListRequestModel.setPage_size(pageSize);
+        newsModuleData.getNewsList(newsListRequestModel);
     }
 
     private void setObserver() {
-        // 设置新闻列表请求参数观察者
-        newsModuleData.newsListRequestModelMutableLiveData.observe(this, new Observer<NewsListRequestModel>() {
+
+        newsModuleData.ok.observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(NewsListRequestModel newsListRequestModel) {
-                // 请求参数变动，请求新闻列表
-                newsModuleData.getNewsList(newsListRequestModel);
+            public void onChanged(Boolean aBoolean) {
+                binding.swipeRefreshLayout.setRefreshing(false);
             }
         });
-
         // 设置新闻列表数据观察者
         newsModuleData.newsListLiveData.observe(this, new Observer<List<NewsListResultData>>() {
             @Override

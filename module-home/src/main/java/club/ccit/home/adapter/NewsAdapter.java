@@ -1,6 +1,7 @@
 package club.ccit.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide;
 
 import club.ccit.basic.BasicAdapter;
 import club.ccit.home.databinding.ItemNewsBinding;
+import club.ccit.home.ui.WebViewActivity;
 import club.ccit.network.news.model.NewsListResultData;
 
 public class NewsAdapter extends BasicAdapter<ItemNewsBinding, NewsListResultData> {
@@ -46,6 +48,15 @@ public class NewsAdapter extends BasicAdapter<ItemNewsBinding, NewsListResultDat
                     .load(item.getThumbnail_pic_s03())
                     .into(holder.binding.imageNewsThumbnail3);
         }
+
+        holder.binding.detailNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("url", item.getUrl());
+                context.startActivity(intent);
+            }
+        });
 
     }
 

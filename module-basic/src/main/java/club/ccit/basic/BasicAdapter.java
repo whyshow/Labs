@@ -40,7 +40,7 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
     public interface LoadMoreListener {
         void onLoadMore(int nextPage); // 触发加载下一页时调用
 
-        void onRetry();                // 点击重试按钮时调用
+        void onRetry(int page);                // 点击重试按钮时调用
     }
 
     private LoadMoreListener loadMoreListener; // 分页加载监听实例
@@ -72,6 +72,9 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
         } else {
             // 更新底部状态视图
             updateFooterUI((FooterViewHolder) holder);
+            if (dataList.isEmpty()) {
+                startLoading();
+            }
         }
     }
 
@@ -95,7 +98,7 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
             if (loadMoreListener != null) {
                 currentState = STATE_LOADING;
                 notifyItemChanged(getItemCount() - 1);
-                loadMoreListener.onRetry();
+                loadMoreListener.onRetry(dataList.size() / getPageSize() + 1);
             }
         });
     }
@@ -106,11 +109,16 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
      * @param newData 新数据集合
      */
     public void appendData(List<D> newData) {
-        int oldSize = dataList.size();
-        dataList.addAll(newData);
-        // 局部刷新优化：只通知新增范围
-        notifyItemRangeInserted(oldSize, newData.size());
-        isLoading = false; // 重置加载锁
+        if (newData == null || newData.isEmpty()) {
+            currentState = STATE_NO_MORE;
+            notifyItemChanged(getItemCount() - 1);
+        } else {
+            int oldSize = dataList.size();
+            dataList.addAll(newData);
+            // 局部刷新优化：只通知新增范围
+            notifyItemRangeInserted(oldSize, newData.size());
+            isLoading = false; // 重置加载锁
+        }
         notifyDataSetChanged();
     }
 

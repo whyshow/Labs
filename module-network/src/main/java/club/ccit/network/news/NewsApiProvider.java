@@ -27,7 +27,7 @@ public class NewsApiProvider extends BaseApiProvider {
 
     @Override
     protected String baseUrl() {
-        return "http://192.168.8.136:9001";
+        return "http://news.985111.cn";
     }
 
     /**

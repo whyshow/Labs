@@ -4,5 +4,7 @@
     <application>
         <!--        首页-->
         <activity android:name="club.ccit.home.ui.MainActivity" />
+        <!--        WebView-->
+        <activity android:name="club.ccit.home.ui.WebViewActivity" />
     </application>
 </manifest>

@@ -18,14 +18,12 @@ import club.ccit.network.news.model.NewsListResultModel;
 public class NewsModuleData extends BaseViewModel {
     private final NewsApi newsApi;
     public MutableLiveData<List<NewsListResultData>> newsListLiveData = new MutableLiveData<>();// 新闻列表数据
-    public MutableLiveData<NewsListRequestModel> newsListRequestModelMutableLiveData = new MutableLiveData<>();// 新闻列表请求参数
-    
+
     public NewsModuleData(@NonNull Application application) {
         super(application);
         // 获取接口实例
         newsApi = new NewsApiProvider().getNewsList();
-        // 初始化默认请求参数
-        newsListRequestModelMutableLiveData.setValue(new NewsListRequestModel());
+
     }
 
     /**

@@ -24,8 +24,8 @@ public class NewsFragment extends BaseViewDataFragment<FragmentNewsBinding> {
     }
 
     private void initViewPager() {
-      //  String[] title = new String[]{NewsType.TOP.getDesc(), NewsType.DOMESTIC.getDesc(), NewsType.SPORTS.getDesc(),NewsType.TECHNOLOGY.getDesc(), NewsType.GAMES.getDesc()};
-        String[] title = new String[]{NewsType.TOP.getDesc()};
+        String[] title = new String[]{NewsType.TOP.getDesc(), NewsType.DOMESTIC.getDesc(), NewsType.SPORTS.getDesc(),NewsType.TECHNOLOGY.getDesc(), NewsType.GAMES.getDesc()};
+
         NewsFragmentCollectionAdapter fragmentCollectionAdapter = new NewsFragmentCollectionAdapter(requireActivity(), title);
         binding.viewPager2.setAdapter(fragmentCollectionAdapter);
         binding.viewPager2.setOffscreenPageLimit(title.length);
