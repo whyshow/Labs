@@ -1,5 +1,6 @@
 package club.ccit.network.news;
 
+import club.ccit.network.NetworkConfig;
 import club.ccit.network.net.BaseApiProvider;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -27,7 +28,7 @@ public class NewsApiProvider extends BaseApiProvider {
 
     @Override
     protected String baseUrl() {
-        return "http://news.985111.cn";
+        return NetworkConfig.getBaseUrl();
     }
 
     /**

@@ -13,23 +13,44 @@ android {
         versionName rootProject.ext.android.versionName
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../labs.jks')
+            storePassword '123456'
+            keyPassword '123456'
+            keyAlias 'labs'
+        }
+
+        debug {
+            storeFile file('../labs.jks')
+            storePassword '123456'
+            keyPassword '123456'
+            keyAlias 'labs'
+        }
+    }
+
     buildTypes {
+        // 生产包
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
-                    MODEL: "RELEASE"
+                    BASE_URL: "http://news.985111.cn", // 生产地址
+                    MODEL   : "RELEASE"
             ]
         }
 
+        // 测试包
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
-                    MODEL: "DEBUG"
+                    BASE_URL: "http://news.985111.cn", // 测试地址
+                    MODEL   : "DEBUG"
             ]
         }
     }
+
     // 打包配置
     android.applicationVariants.configureEach { variant ->
         variant.outputs.configureEach {

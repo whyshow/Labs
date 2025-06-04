@@ -12,6 +12,8 @@ import com.android.tony.defenselib.handler.IExceptionHandler;
 
 import java.util.Arrays;
 
+import club.ccit.network.NetworkConfig;
+
 /**
  * @author swzhang3
  */
@@ -24,6 +26,9 @@ public class BaseApplication extends Application {
         application = this;
         ARouter.init(this);
         setARouter();
+        // 初始化网络配置
+         NetworkConfig.setBaseUrl(getBaseUrl());
+         NetworkConfig.setIsDebug(isDebug());
     }
 
     public void setARouter() {
@@ -64,4 +69,20 @@ public class BaseApplication extends Application {
             return msg.equals("DEBUG");
         }
     }
+
+    // 获取BaseUrl
+    private String getBaseUrl() {
+        ApplicationInfo appInfo;
+        String msg = "";
+        try {
+            appInfo = this.getPackageManager()
+                    .getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+            msg = appInfo.metaData.getString("BASE_URL");
+        } catch (PackageManager.NameNotFoundException e1) {
+            e1.printStackTrace();
+        }
+        return msg;
+    }
+
+
 }

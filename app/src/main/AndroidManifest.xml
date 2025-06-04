@@ -12,7 +12,12 @@
         android:theme="@style/Theme.Labs"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <!--        设置运行是DEBUG或者RELEASE-->
+        <!--        域名-->
+        <meta-data
+            android:name="BASE_URL"
+            android:value="${BASE_URL}" />
+
+        <!--        是不是debug模式-->
         <meta-data
             android:name="MODEL"
             android:value="${MODEL}" />

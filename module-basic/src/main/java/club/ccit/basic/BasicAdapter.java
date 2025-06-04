@@ -129,9 +129,16 @@ public abstract class BasicAdapter<T extends ViewBinding, D> extends RecyclerVie
                 }
             }
 
+            boolean isFirstPage = dataList.isEmpty();
             int oldSize = dataList.size();
             dataList.addAll(filteredData);
-            notifyItemRangeInserted(oldSize, filteredData.size());
+
+            if (isFirstPage) {
+                notifyDataSetChanged(); // 第一页使用全量刷新，保持在顶部
+            } else {
+                notifyItemRangeInserted(oldSize, filteredData.size());
+            }
+
             isLoading = false;
 
             // 如果过滤后数据为空，显示无更多数据

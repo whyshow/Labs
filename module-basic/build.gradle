@@ -44,6 +44,7 @@ dependencies {
     implementation libs.viewbinding
     // 路由
     implementation libs.arouterApi
+    implementation project(':module-network')
     annotationProcessor libs.annotationArouter
     implementation libs.crash
     implementation libs.navigationUi
