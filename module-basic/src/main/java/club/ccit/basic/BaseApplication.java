@@ -6,7 +6,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.android.tony.defenselib.DefenseCrash;
 import com.android.tony.defenselib.handler.IExceptionHandler;
 
@@ -24,21 +23,11 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-        ARouter.init(this);
-        setARouter();
         // 初始化网络配置
          NetworkConfig.setBaseUrl(getBaseUrl());
          NetworkConfig.setIsDebug(isDebug());
     }
 
-    public void setARouter() {
-        if (isDebug()) {
-            // 打印日志
-            ARouter.openLog();
-            // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-            ARouter.openDebug();
-        }
-    }
 
     @Override
     protected void attachBaseContext(Context base) {

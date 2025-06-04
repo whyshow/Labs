@@ -19,3 +19,28 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 防止ViewBinding被混淆
+-keep class * implements androidx.viewbinding.ViewBinding {
+    public static ** inflate(**);
+}
+# 防止ViewDataBinding被混淆
+-keep class * implements androidx.databinding.ViewDataBinding {
+    public static ** inflate(**);
+}
+
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+-dontwarn javax.lang.model.element.Element
+
+-keep public class club.ccit.network.**{*;}
+
+# 防止.so文件混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# 泛型不混淆
+-keepattributes Signature
