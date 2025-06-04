@@ -32,7 +32,7 @@ android {
     buildTypes {
         // 生产包
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
                     BASE_URL: "http://news.985111.cn", // 生产地址
@@ -42,8 +42,8 @@ android {
 
         // 测试包
         debug {
-            minifyEnabled true
-            shrinkResources false // 移除无用的资源文件
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
                     BASE_URL: "http://news.985111.cn", // 测试地址
