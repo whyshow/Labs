@@ -35,7 +35,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
-                    BASE_URL: "http://news.985111.cn", // 生产地址
+                    BASE_URL: "http://api.985111.cn", // 生产地址
                     MODEL   : "RELEASE"
             ]
         }
@@ -46,7 +46,7 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
-                    BASE_URL: "http://news.985111.cn", // 测试地址
+                    BASE_URL: "http://api.985111.cn", // 测试地址
                     MODEL   : "DEBUG"
             ]
         }
@@ -79,7 +79,7 @@ android {
 dependencies {
     implementation libs.appcompat
     implementation libs.material
-    debugImplementation libs.leakcanaryAndroid
+//    debugImplementation libs.leakcanaryAndroid
 
     implementation project(path: ':module-basic')
     implementation project(path: ':module-home')

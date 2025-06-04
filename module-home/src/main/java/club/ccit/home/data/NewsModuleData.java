@@ -8,6 +8,7 @@ import java.util.List;
 import club.ccit.basic.BaseViewModel;
 import club.ccit.network.net.AbstractApiObserver;
 import club.ccit.network.net.AndroidObservable;
+import club.ccit.network.net.BaseModel;
 import club.ccit.network.news.NewsApi;
 import club.ccit.network.news.NewsApiProvider;
 import club.ccit.network.news.model.NewsListRequestModel;
@@ -32,17 +33,17 @@ public class NewsModuleData extends BaseViewModel {
      * @param requestModel 新闻列表请求参数
      */
     public void getNewsList(NewsListRequestModel requestModel) {
-        AndroidObservable.create(newsApi.getNewsList(requestModel)).subscribe(new AbstractApiObserver<NewsListResultModel>() {
+        AndroidObservable.create(newsApi.getNewsList(requestModel)).subscribe(new AbstractApiObserver<BaseModel<NewsListResultModel>>() {
             @Override
-            protected void succeed(NewsListResultModel newsListResultModel) {
-                if (newsListResultModel.getReason().equals("查询成功")){
+            protected void succeed(BaseModel<NewsListResultModel> newsListResultModel) {
+                if (newsListResultModel.getCode() == SUCCESS){
                     // 请求成功
-                    newsListLiveData.setValue(newsListResultModel.getResult());
+                    newsListLiveData.setValue(newsListResultModel.getData().getResult());
                     ok.setValue(true);
                     // 保存到持久数据中
                 }else {
                     // 请求失败
-                    messageText.setValue(newsListResultModel.getReason());
+                    messageText.setValue(newsListResultModel.getMsg());
                     ok.setValue(false);
                 }
             }
