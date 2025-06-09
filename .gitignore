@@ -8,7 +8,7 @@
 ./app/release/
 # Java class files
 *.class
-
+app/release/
 # Generated files
 bin/
 gen/

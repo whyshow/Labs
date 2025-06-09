@@ -27,9 +27,9 @@ public interface NewsApi {
     Observable<BaseModel<NewsListResultModel>> getNewsList(@Body NewsListRequestModel requestModel);
 
     /**
-     * 新闻列表 暂不可用
+     * 新闻列表
      */
-    @GET("/news/index")
+    @GET("/news/list")
     Observable<BaseModel<NewsListResultModel>> getNewsList(
             @Query("type") String type,
             @Query("page") int page,

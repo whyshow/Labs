@@ -4,7 +4,9 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
+
 import java.util.List;
+
 import club.ccit.basic.BaseViewModel;
 import club.ccit.network.net.AbstractApiObserver;
 import club.ccit.network.net.AndroidObservable;
@@ -33,15 +35,22 @@ public class NewsModuleData extends BaseViewModel {
      * @param requestModel 新闻列表请求参数
      */
     public void getNewsList(NewsListRequestModel requestModel) {
-        AndroidObservable.create(newsApi.getNewsList(requestModel)).subscribe(new AbstractApiObserver<BaseModel<NewsListResultModel>>() {
+        // POST请求
+//        newsApi.getNewsList(requestModel)
+        //GTE请求
+        AndroidObservable.create(newsApi.getNewsList(
+                requestModel.getType(), // 新闻类型
+                requestModel.getPage(), // 页码
+                requestModel.getPage_size() // 每页条数
+        )).subscribe(new AbstractApiObserver<BaseModel<NewsListResultModel>>() {
             @Override
             protected void succeed(BaseModel<NewsListResultModel> newsListResultModel) {
-                if (newsListResultModel.getCode() == SUCCESS){
+                if (newsListResultModel.getCode() == SUCCESS) {
                     // 请求成功
                     newsListLiveData.setValue(newsListResultModel.getData().getResult());
                     ok.setValue(true);
                     // 保存到持久数据中
-                }else {
+                } else {
                     // 请求失败
                     messageText.setValue(newsListResultModel.getMsg());
                     ok.setValue(false);
