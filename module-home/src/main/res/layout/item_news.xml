@@ -21,10 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:fontFamily="@font/source_code_pro_semibold"
             android:maxLines="2"
+            android:text="123"
             android:textColor="@color/text_primary"
             android:textSize="16sp" />
-
 
         <!-- 缩略图 -->
         <LinearLayout
